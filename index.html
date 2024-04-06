@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKTHOTEL</title>
+</head>
+<body>
+    <script>
+        nomeHotel = 'HotelSK8';
+senha = 1;
+alert('Bem vindo ao ' + nomeHotel);
+nomeUsuario = prompt('E você usuário, qual é seu nome?: ');
+senhaUsuario = parseInt(prompt('Agora digite sua senha!: '));
+
+while (senhaUsuario != senha) {
+    alert('A senha está incorreta, digite novamente: ');
+    senhaUsuario = parseInt(prompt('Agora digite sua senha!: '));
+}
+
+alert('Bem vindo ao ' + nomeHotel + '.\nÉ um prazer imenso ter você por aqui ' + nomeUsuario);
+
+function inicio() {
+    var escolha = parseInt(prompt('\nSelecione uma opção 1.) Reservar Quarto 2.) Depósito 3.) Saque 4.) Extrato 5.)Sair'));
+
+    switch (escolha) {
+        case 1:
+            cadastroQuarto();
+            break;
+
+        case 2:
+            cadastroHospedes();
+            break    
+        case 3:
+            menuHospede();
+            break;
+
+        case 4:
+          cadastroEvento();
+            break;
+
+        case 5:
+            verGasolina();
+            break;
+
+        case 6:
+            manutencaoHotel();
+        case 7:
+            sair();
+            break;
+
+        default:
+            erro();
+    }
+}
+// Recupera os dados armazenados do sessionStorage ou inicializa como um array vazio
+var quartosOcupados = JSON.parse(sessionStorage.getItem('quartosOcupados')) || [];
+var listaQuarto = JSON.parse(sessionStorage.getItem('listaQuarto')) || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+function cadastroQuarto() {
+
+    diaria = parseFloat(prompt('Qual é o valor pago na diária?: '));
+    while (diaria <= 0 || isNaN(diaria)) {
+        diaria = parseInt(prompt('Valor inválido, digite novamente o valor da diária: '));
+    }
+    diasUsuario = parseInt(prompt("Quantos dias você passará em nosso hotel " + nomeUsuario + '?'));
+    while (diasUsuario <= 0 || diasUsuario > 30 ||  isNaN(diasUsuario))  {
+        diasUsuario = parseInt(prompt('Valor inválido, digite novamente a quantidade de dias em nosso hotel: '));
+    }
+    parseFloat(valorFinal = diasUsuario * diaria)
+    alert('O valor de ' + diasUsuario + ' dias de hospedagem é de: ' + valorFinal);
+    cadastroNome = prompt('Qual o nome do hóspede?: ');
+    alert('Qual é o quarto para reserva?: \nQuartos dispóniveis: ' + listaQuarto);
+    quartoUser = parseInt(prompt('Qual quarto o senhor deseja?: '));
+    while (quartoUser <= 0 || quartoUser > 20 ||  isNaN(quartoUser)) {
+        alert('Você selecionou um quarto que não faz parte da nossa frota, digite novamente o quarto que você deseja\n' + listaQuarto);
+        quartoUser = parseInt(prompt('Qual quarto o senhor deseja?: '));
+    }
+
+    while (!listaQuarto.includes(quartoUser)) {
+        alert('Este quarto já está sendo utilizado, por favor selecione outro');
+        quartoUser = parseInt(prompt('Qual quarto o senhor deseja?: '));
+    }
+
+    if (listaQuarto.includes(quartoUser)) {
+        alert('Quarto disponível!');
+        confirmacao = prompt(cadastroNome + ', você confirma a hospedagem para ' + cadastroNome + ' por ' + diasUsuario + ' dias, para o quarto ' + quartoUser + ' por R$' + valorFinal + '? S/N').toLowerCase();
+
+        if (confirmacao == 's') {
+            novoIndice = listaQuarto.indexOf(quartoUser);
+            listaQuarto.splice(novoIndice, 1);
+            alert(cadastroNome + ', reserva no quarto ' + quartoUser + ' foi confirmada!');
+            adicionarUsuario(quartoUser, cadastroNome);
+            sessionStorage.setItem('listaQuarto', JSON.stringify(listaQuarto))
+            sessionStorage.setItem('quartosOcupados', JSON.stringify(quartosOcupados));
+        } else {
+            alert('Seção finalizada, voltando para o início!');
+        }
+    }
+    inicio();
+}
+//função do cadastrode usuarios
+function adicionarUsuario(quartoUser, nomeCadastro) {
+    usuario = { quartoUser, nomeCadastro };
+    quartosOcupados.push(usuario);
+}
+
+
+inicio();
+
+    </script>
+</body>
+</html>
