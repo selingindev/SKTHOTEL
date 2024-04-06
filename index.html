@@ -21,7 +21,7 @@ while (senhaUsuario != senha) {
 alert('Bem vindo ao ' + nomeHotel + '.\nÉ um prazer imenso ter você por aqui ' + nomeUsuario);
 
 function inicio() {
-    var escolha = parseInt(prompt('\nSelecione uma opção 1.) Reservar Quarto 2.) Depósito 3.) Saque 4.) Extrato 5.)Sair'));
+    var escolha = parseInt(prompt('\nSelecione uma opção 1.) Reservar Quarto 2.) Cadastro Hóspedes 3.) Saque 4.) Extrato 5.)Sair'));
 
     switch (escolha) {
         case 1:
@@ -103,6 +103,34 @@ function cadastroQuarto() {
 function adicionarUsuario(quartoUser, nomeCadastro) {
     usuario = { quartoUser, nomeCadastro };
     quartosOcupados.push(usuario);
+}
+
+function cadastroHospedes(){
+    gratuito = 0
+    meia = 0
+    valorFinal = 0
+    valorDiaria = parseFloat(prompt('Digite o valor padrão da diária: ')) 
+    cadastro = true
+    while(cadastro == true){
+        hospedeNome = prompt('Qual nome do hóspede?: ')
+        hospedeIdade = parseInt(prompt('Qual a idade?: '))
+        if(hospedeIdade >= 60){
+            meia++
+            valorFinal += valorDiaria / 2
+            alert(hospedeNome+' cadastrado(a) com sucesso! '+hospedeNome +' paga meia.')
+        }else if(hospedeIdade <= 6){
+            gratuito++
+            alert(hospedeNome+' cadastrado(a) com sucesso! '+hospedeNome +' não paga nada.')
+        }else{
+            valorFinal += valorDiaria
+            alert(hospedeNome+' cadastrado(a) com sucesso!')
+        }
+       paraConfirmed = prompt('Deseja parar? digite PARE para confirmar ou aperte qualquer coisa para continuar: ').toLowerCase()
+       if(paraConfirmed == 'pare'){
+        cadastro = false
+       }
+    }
+    alert(nomeUsuario+', o valor total das hospedagens é: R$'+valorFinal+'; '+gratuito+' gratuitudade(s); '+meia+' meia(s)')
 }
 
 
