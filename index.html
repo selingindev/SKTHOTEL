@@ -21,7 +21,7 @@ while (senhaUsuario != senha) {
 alert('Bem vindo ao ' + nomeHotel + '.\nÉ um prazer imenso ter você por aqui ' + nomeUsuario);
 
 function inicio() {
-    var escolha = parseInt(prompt('\nSelecione uma opção 1.) Reservar Quarto 2.) Cadastro Hóspedes 3.) Saque 4.) Extrato 5.)Sair'));
+    var escolha = parseInt(prompt('\nSelecione uma opção 1.) Reservar Quarto 2.) Cadastro Hóspedes 3.) Menu Hóspedes 4.) Extrato 5.)Sair'));
 
     switch (escolha) {
         case 1:
@@ -54,6 +54,7 @@ function inicio() {
     }
 }
 // Recupera os dados armazenados do sessionStorage ou inicializa como um array vazio
+var usersCadastrados = JSON.parse(sessionStorage.getItem('usersCadastrados')) || [];
 var quartosOcupados = JSON.parse(sessionStorage.getItem('quartosOcupados')) || [];
 var listaQuarto = JSON.parse(sessionStorage.getItem('listaQuarto')) || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
@@ -140,9 +141,150 @@ function cadastroHospedes(){
 }
 
 function menuHospede(){
-    
-}
+    var escolhaMenu = parseInt(prompt('\nSelecione uma opção 1.) Cadastrar  2.) Pesquisar 3.) Listar 4.) Sair'));
 
+    switch (escolhaMenu) {
+        case 1:
+            cadastro();
+            break;
+
+        case 2:
+            pesquisar();
+            break    
+        case 3:
+            listar();
+            break;
+
+        case 4:
+            sair();
+            break;
+
+        default:
+            erro();
+    }
+
+    function cadastro(){
+        alert('Você so pode fazer no maximo 15 cadastro!')
+        cadastroValidation = true
+    while(cadastroValidation == true){
+        nomeCadastro = prompt('Digite seu nome por favor')
+        while(!isNaN(nomeCadastro) ||  nomeCadastro == null){
+            nomeCadastro = prompt('Apenas digite textos. Digite seu nome por favor')
+        }
+        alert('Hóspede '+nomeCadastro+' foi cadastrada(o) com sucesso!')
+
+         if (usersCadastrados.length == 15){
+        alert('Não é possível adicionar mais que 15 cadastros')
+       cadastroValidation == false     
+    }else{
+        usersCadastrados.push(nomeCadastro)
+        sessionStorage.setItem('usersCadastrados', JSON.stringify(usersCadastrados));
+    }
+    var escolhaMenu = parseInt(prompt('\nSelecione uma opção 1.) Cadastrar 2.) Pesquisar 3.) Listar 4.) Sair'));
+    
+    switch (escolhaMenu) {
+        case 1:
+            cadastro();
+            break;
+
+        case 2:
+            pesquisar();
+            break    
+        case 3:
+            listar();
+            break;
+
+        case 4:
+            sair();
+            break;
+
+        default:
+            erro();
+    }        
+    }
+     var escolhaMenu = parseInt(prompt('\nSelecione uma opção 1.) Cadastrar  2.) Pesquisar 3.) Listar 4.) Sair'));
+    
+     switch (escolhaMenu) {
+        case 1:
+            cadastro();
+            break;
+
+        case 2:
+            pesquisar();
+            break    
+        case 3:
+            listar();
+            break;
+
+        case 4:
+            sair();
+            break;
+
+        default:
+            erro();
+    }        
+    }
+    function pesquisar(){
+        alert('Pesquise por uma pessoa que está no hotel') 
+      nomeVerificacao = prompt()
+      while(!isNaN(nomeVerificacao) || nomeVerificacao == null){
+        nomeVerificacao = prompt()
+      }
+      if(usersCadastrados.includes(nomeVerificacao)){
+        alert('Hóspede '+nomeVerificacao+' foi encotrado(a)')
+      }else{
+        alert('Hóspede não encontrado(a)')
+      }
+      var escolhaMenu = parseInt(prompt('\nSelecione uma opção 1.) Cadastrar  2.) Pesquisar 3.) Listar 4.) Sair'));
+      switch (escolhaMenu) {
+        case 1:
+            cadastro();
+            break;
+
+        case 2:
+            pesquisar();
+            break    
+        case 3:
+            listar();
+            break;
+
+        case 4:
+            sair();
+            break;
+
+        default:
+            erro();
+    }        
+    }
+
+    function listar(){
+        alert(usersCadastrados)
+        var escolhaMenu = parseInt(prompt('\nSelecione uma opção 1.) Cadastrar  2.) Pesquisar 3.) Listar 4.) Sair'));
+    
+    switch (escolhaMenu) {
+       case 1:
+           cadastro();
+           break;
+
+       case 2:
+           pesquisar();
+           break    
+       case 3:
+           listar();
+           break;
+
+       case 4:
+           sair();
+           break;
+
+       default:
+           erro();
+   }   
+    }
+   function sair(){
+    inicio();
+   }
+}
 inicio();
 
     </script>
