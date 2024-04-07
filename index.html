@@ -113,7 +113,13 @@ function cadastroHospedes(){
     cadastro = true
     while(cadastro == true){
         hospedeNome = prompt('Qual nome do hóspede?: ')
+        while(!isNaN(hospedeNome) || hospedeNome == null){
+            hospedeNome = prompt('Nomes são apenas textos e não numeros, digite novamente. Qual nome do hóspede?: ')    
+        }
         hospedeIdade = parseInt(prompt('Qual a idade?: '))
+        while(isNaN(hospedeIdade) || hospedeNome == null){
+            hospedeIdade = parseInt(prompt('Idades aceitam apenas números, por favor digite novamente. Qual a idade?: '))    
+        }
         if(hospedeIdade >= 60){
             meia++
             valorFinal += valorDiaria / 2
@@ -133,6 +139,9 @@ function cadastroHospedes(){
     alert(nomeUsuario+', o valor total das hospedagens é: R$'+valorFinal+'; '+gratuito+' gratuitudade(s); '+meia+' meia(s)')
 }
 
+function menuHospede(){
+    
+}
 
 inicio();
 
