@@ -57,6 +57,26 @@ function inicio() {
 var usersCadastrados = JSON.parse(sessionStorage.getItem('usersCadastrados')) || [];
 var quartosOcupados = JSON.parse(sessionStorage.getItem('quartosOcupados')) || [];
 var listaQuarto = JSON.parse(sessionStorage.getItem('listaQuarto')) || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+eventos = JSON.parse(sessionStorage.getItem('eventos')) || {
+    localEvento:[],
+    quantidadePessoas: [],
+    horas: [],
+    dia: [],
+    funcionarios: [],
+    valorEvento: []
+}
+segundaSexta = JSON.parse(sessionStorage.getItem('segundaSexta')) || {segunda:[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+                    terca:[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+                    quarta:[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+                    quinta:[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+                    sexta:[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+    }
+    sabadoDomingo = JSON.parse(sessionStorage.getItem('sabadoDomingo')) || [
+        sabado = [7,8,9,10,11,12,13,14,15],
+        domingo =[7,8,9,10,11,12,13,14,15]
+]
+
+
 
 function cadastroQuarto() {
 
@@ -287,10 +307,53 @@ function menuHospede(){
 }
 
 function cadastroEvento(){
+    auditorioLaranja = 150
+    cadeirasAdicionais = 70
+    auditorioColorado = 350
 
+    alert('Você pode convidar até 350 pessoas!')
+    numerosConvidados = parseInt(prompt('Digite a quantidade de convidados para seu evento'))
+
+    while(numerosConvidados <=0 || numerosConvidados > 350 || isNaN(numerosConvidados) || numerosConvidados == null){
+        numerosConvidados = parseInt(prompt('“Número de convidados inválido lembresse que são no máximo apenas 350 lugares. Digite a quantidade de convidados para seu evento'))
+    }
+   
+    if(numerosConvidados <= auditorioLaranja){
+        alert('Use o auditorio laranja')
+        alert('Agora vamos ver a agenda do evento.') 
+        eventos.localEvento.push ( "Auditorio Laranja");
+        eventos.quantidadePessoas.push(numerosConvidados)
+           }else if(numerosConvidados <= (auditorioLaranja + cadeirasAdicionais)){
+    alert('Use o auditório laranja e adicione mais ' + (numerosConvidados - auditorioLaranja) + ' cadeiras')
+    alert('Agora vamos ver a agenda do evento.')
+    eventos.localEvento.push ( "Auditorio Laranja");
+    eventos.quantidadePessoas.push(numerosConvidados)
+    }else{
+        alert('Use o auditório Colorado')
+        alert('Agora vamos ver a agenda do evento.')
+        eventos.localEvento.push("Auditorio Colorado");   
+        eventos.quantidadePessoas.push(numerosConvidados)
+    }
+    diaUser = prompt('Qual dia será o evento?: ')
+        if(sabadoDomingo[0,1].includes(diaUser)){
+            eventos.dia.push(diaUser);
+            horaUser = prompt('Qual é a hora do evento?: ')
+            if(sabadoDomingo[0,1].includes(horaUser)){
+            indice = sabadoDomingo[0,1].indexOf(horaUser);
+            sabadoDomingo[0,1].splice(indice, 1); 
+            alert(sabadoDomingo[0,1])
+        }
+        }
+    else if(segundaSexta.includes(diaUser)){
+
+    }
+    sessionStorage.setItem(eventos, JSON.stringify(eventos));
 }
+
+
+
 inicio();
 
     </script>
 </body>
-</html>
+</html>-
