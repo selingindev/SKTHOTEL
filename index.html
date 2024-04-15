@@ -393,7 +393,7 @@
     eventos.nomeEmpresa.push(nomeEmpresa)
 
     eventos.horasInicio.push(horaUser);
-    eventos.horasTermino.push(horaUser + horasEvento);
+    eventos.horasTermino.push(horaUser + horasEvento - 1);
 
     horaGarcom = 10.50
     contadorFuncionario = 0 
@@ -416,33 +416,55 @@
     alert('Agora vamos calcular o preço do Buffet');
 
 
- cafePrecoLitro = 0.80;
- aguaPrecoLitro = 0.40;
- salgadoPreco = 34;
+    cafePrecoLitro = 0.80;
+    aguaPrecoLitro = 0.40;
+    salgadoPreco = 34;
 
- cafeQuantidadePessoa = 0.2;
- aguaQuantidadePessoa = 0.5;
- salgadoQuantidadePessoa = 7;
+    cafeQuantidadePessoa = 0.2;
+    aguaQuantidadePessoa = 0.5;
+    salgadoQuantidadePessoa = 7;
 
- cafePublico =  numerosConvidados * cafeQuantidadePessoa;
- aguaPublico = numerosConvidados * aguaQuantidadePessoa;
- salgadoQuantidade = numerosConvidados * salgadoQuantidadePessoa;
+    cafePublico =  numerosConvidados * cafeQuantidadePessoa;
+    aguaPublico = numerosConvidados * aguaQuantidadePessoa;
+    salgadoQuantidade = numerosConvidados * salgadoQuantidadePessoa;
 
- litrosCafe = cafePublico / cafePrecoLitro;
- litrosAgua = aguaPublico / aguaPrecoLitro;
+    litrosCafe = cafePublico / cafePrecoLitro;
+    litrosAgua = aguaPublico / aguaPrecoLitro;
 
- custoCafe = cafePublico * cafePrecoLitro;
- custoAgua = aguaPublico * aguaPrecoLitro;
- custoSalgado = (salgadoQuantidade / 100) * salgadoPreco; custoTotalComida = custoCafe + custoAgua + custoSalgado;
+    custoCafe = cafePublico * cafePrecoLitro;
+    custoAgua = aguaPublico * aguaPrecoLitro;
+    custoSalgado = (salgadoQuantidade / 100) * salgadoPreco; 
+    custoTotalComida = custoCafe + custoAgua + custoSalgado;
 
-alert('O evento precisará de ' + litrosCafe.toFixed(2) + ' litros de café, ' + litrosAgua.toFixed(2) + ' litros de água, ' + salgadoQuantidade + ' salgados.');
-alert('O custo total com comida do evento será de R$' + custoTotalComida.toFixed(2));
+    alert('O evento precisará de ' + litrosCafe.toFixed(2) + ' litros de café, ' + litrosAgua.toFixed(2) + ' litros de água, ' + salgadoQuantidade + ' salgados.');
 
+    valorTotalEvento = custoTotalComida + valorGarcom
+    
+    eventos.valorEvento.push(valorTotalEvento.toFixed(2))
 
-    sessionStorage.setItem('eventos', JSON.stringify(eventos));
-    sessionStorage.setItem('segundaSexta', JSON.stringify(segundaSexta));
-    sessionStorage.setItem('sabadoDomingo', JSON.stringify(sabadoDomingo));
-        inicio()
+    alert('Local: '+eventos.localEvento[eventos.]+'\n'+
+    'Quantidade Convidados: '+eventos.quantidadePessoas[eventos.quantidadePessoas.length-1]+'\n'+
+    'Hora de Início: '+eventos.horasInicio[eventos.horasInicio.length-1] +'\n'+
+    'Hora de duração: '+horasEvento +'\n'+
+    'Dia do Evento: '+eventos.dia[eventos.dia.length-1] +'\n'+
+    'Quantidade de Funcíonarios: '+eventos.funcionarios[eventos.funcionarios.length-1] + '\n'+
+    'Nome da Empresa: '+eventos.nomeEmpresa[eventos.nomeEmpresa.length-1]+ '\n'+
+    'Custo garçons: '+ valorGarcom.toFixed(2)+'\n'+
+    'Custo do buffet: '+custoTotalComida.toFixed(2)+'\n'+
+    'Valor do Evento: '+eventos.valorEvento[eventos.valorEvento.length-1]
+)
+            reserva = prompt('Gostaria de confirmar a reserva? S/N')
+
+            if(reserva.toLowerCase() === 's'){
+                alert(nomeUsuario + ',Reserva efetuada com sucesso!')
+                sessionStorage.setItem('eventos', JSON.stringify(eventos));
+                sessionStorage.setItem('segundaSexta', JSON.stringify(segundaSexta));
+                sessionStorage.setItem('sabadoDomingo', JSON.stringify(sabadoDomingo));
+            }else{
+                alert('Reserva não efetuada')
+            }
+
+    inicio();
    
 }
 
