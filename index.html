@@ -28,7 +28,7 @@
             }
 
         function inicio() {
-            var escolha = parseInt(prompt('\nSelecione uma opção 1.) Reservar Quarto 2.) Cadastro Hóspedes 3.) Menu Hóspedes 4.) Cadastrar Evento 5.)Ver Gasolina 6.)Manutenção 7.)Sair'));
+            var escolha = parseInt(prompt('Selecione uma opção: \n1.) Reservar Quarto \n2.) Cadastro Hóspedes \n3.) Menu Hóspedes \n4.) Cadastrar Evento \n5.)Ver Gasolina \n6.)Manutenção \n7.)Sair'));
 
             switch (escolha) {
                 case 1:
@@ -171,7 +171,7 @@
         }
 
         function menuHospede() {
-            var escolhaMenu = parseInt(prompt('\nSelecione uma opção 1.) Cadastrar  2.) Pesquisar 3.) Listar 4.) Ver Eventos 5.) Sair '));
+            var escolhaMenu = parseInt(prompt('Selecione uma opção:  \n1.) Cadastrar  \n2.) Pesquisar \n3.) Listar \n4.) Ver Eventos \n5.) Sair '));
 
             switch (escolhaMenu) {
                 case 1:
@@ -381,7 +381,7 @@
     }
 
     let horasEvento = parseInt(prompt('Quantas horas durará o evento?'));
-    while (isNaN(horasEvento) || horasEvento <= 0) {
+    while (isNaN(horasEvento) || horasEvento <= 0 || horasEvento == null) {
     horasEvento = parseInt(prompt('Valor inválido! Digite novamente quantas horas durará o evento:'));
 }
 
@@ -478,7 +478,14 @@
         valorPosto1Alcool = parseFloat(prompt('Qual o valor do álcool no posto Wayne Oi?: '))
         valorPosto2Gasolina = parseFloat(prompt('Qual o valor da gasolina no posto  Stark Petrol ?: '))
         valorPosto2Alcool = parseFloat(prompt('Qual o valor do álcool no posto  Stark Petrol ?: '))
-    
+        while(isNaN(valorPosto1Alcool) || isNaN(valorPosto1Gasolina) || isNaN(valorPosto2Gasolina) || isNaN(valorPosto2Alcool) || valorPosto1Alcool == null || valorPosto1Gasolina == null || valorPosto2Gasolina == null || valorPosto2Alcool == null){
+    alert('Valores inválidos digite apenas números ')
+    valorPosto1Gasolina = parseFloat(prompt('Qual o valor da gasolina no posto Wayne Oi?: '))
+    valorPosto1Alcool = parseFloat(prompt('Qual o valor do álcool no posto Wayne Oi?: '))
+    valorPosto2Gasolina = parseFloat(prompt('Qual o valor da gasolina no posto  Stark Petrol ?: '))
+    valorPosto2Alcool = parseFloat(prompt('Qual o valor do álcool no posto  Stark Petrol ?: ')) 
+}
+
         if((valorPosto1Alcool && valorPosto2Alcool < 0.7 * valorPosto1Gasolina) || (valorPosto1Alcool && valorPosto2Alcool < 0.7 * valorPosto2Gasolina )){
             if(valorPosto1Alcool<valorPosto2Alcool){
                 menorAlcool = 'Wayne Oil'
