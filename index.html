@@ -10,7 +10,7 @@
 <body>
     <script>
         nomeHotel = 'HotelSK8';
-        senha = 1;
+        senha = 2678;
         alert('Bem vindo ao ' + nomeHotel);
         nomeUsuario = prompt('E você usuário, qual é seu nome?: ');
         senhaUsuario = parseInt(prompt('Agora digite sua senha!: '));
@@ -321,14 +321,14 @@
                 }
             }
             function verEventos(){
-                alert('Local: '+eventos.localEvento +'\n'+
-                'Quantidade Convidados: '+eventos.quantidadePessoas +'\n'+
-                'Hora de Início: '+eventos.horasInicio +'\n'+
-                'Hora de Termino: '+eventos.horasTermino +'\n'+
-                'Dia do Evento: '+eventos.dia +'\n'+
-                'Quantidade de Funcíonarios: '+eventos.funcionarios + '\n'+
-                'Valor do Evento: '+eventos.valorEvento+ '\n'+
-                'Nome da Empresa: '+eventos.nomeEmpresa 
+                alert('Local: '+eventos.localEvento.join(" ,") +'\n'+
+                'Quantidade Convidados: '+eventos.quantidadePessoas.join(" ,") +'\n'+
+                'Hora de Início: '+eventos.horasInicio.join(" ,") +'\n'+
+                'Hora de Termino: '+eventos.horasTermino.join(" ,") +'\n'+
+                'Dia do Evento: '+eventos.dia.join(" ,") +'\n'+
+                'Quantidade de Funcíonarios: '+eventos.funcionarios.join(" ,") + '\n'+
+                'Valor do Evento: '+eventos.valorEvento.join(" ,")+ '\n'+
+                'Nome da Empresa: '+eventos.nomeEmpresa.join(" ,") 
             )
                 menuHospede();
             }
@@ -507,6 +507,46 @@
         }
         inicio()
     }
+   function manutencaoHotel(){
+
+ empresas = [];
+
+    while (true) {
+         nomeEmpresa = prompt("Qual o nome da empresa?");
+         valorPorAparelho = parseFloat(prompt("Qual o valor por aparelho?"));
+         quantidadeAparelhos = parseInt(prompt("Qual a quantidade de aparelhos?"));
+         percentualDesconto = parseFloat(prompt("Qual a porcentagem de desconto?"));
+         quantidadeMinimaDesconto = parseInt(prompt("Qual o número mínimo de aparelhos para conseguir o desconto?"));
+
+         custo = calcularCustoServico(nomeEmpresa, valorPorAparelho, quantidadeAparelhos, percentualDesconto, quantidadeMinimaDesconto);
+        empresas.push({ nome: nomeEmpresa, custo: custo });
+
+        continuar = prompt("Deseja informar novos dados? (S/N)").toUpperCase();
+        if (continuar === 'N') {
+            inicio()
+        }
+    }
+     menorCusto = empresas[0].custo;
+     empresaMenorCusto = empresas[0].nome;
+    for (let i = 1; i < empresas.length; i++) {
+        if (empresas[i].custo < menorCusto) {
+            menorCusto = empresas[i].custo;
+            empresaMenorCusto = empresas[i].nome;
+        }
+    }
+
+   alert(`O orçamento de menor valor é o de ${empresaMenorCusto} por R$ ${menorCusto}`);
+
+   function calcularCustoServico(nomeEmpresa, valorPorAparelho, quantidadeAparelhos, percentualDesconto, quantidadeMinimaDesconto) {
+     valorTotalManuntencao = valorPorAparelho * quantidadeAparelhos;
+    if (quantidadeAparelhos >= quantidadeMinimaDesconto) {
+         desconto = (percentualDesconto / 100) * valorTotalManuntencao;
+        valorTotalManuntencao -= desconto;
+    }
+    alert(`O serviço de ${nomeEmpresa} custará R$ ${valorTotalManuntencao}`);
+}   
+
+}
 
 
 
